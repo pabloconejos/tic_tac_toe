@@ -1,0 +1,96 @@
+.main-section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.salas-container {
+    background-color: black;
+    color: #33ff33;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    min-width: 600px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #33ff33;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.salas-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.salas-container li {
+    border-bottom: 1px solid #00ff00;
+    padding: 10px 0;
+}
+
+.salas-container p {
+    margin: 5px 0;
+}
+
+.salas-container button {
+    background-color: #00ff00;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.salas-container button:hover {
+    background-color: #33ff33;
+}
+
+.create-room-button {
+    width: 100%;
+    background-color: #00ff00;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.create-room-button:hover {
+    background-color: #33ff33;
+}
+
+.no-rooms-message {
+    background-color: #ff3333;
+    color: white;
+    padding: 15px;
+    border: 2px solid #ff0000;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: 18px;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

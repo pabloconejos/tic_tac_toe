@@ -1,0 +1,27 @@
+<div class="main-section">
+    <div class="terminal">
+        <h1>$ user_id => {{ userService.getUserId() }}</h1>
+        <div class="salas-container">
+            <h1>$ ls salas_disponibles</h1>
+            <ul>
+                @for (room of roomService.getRooms(); track room.id) {
+                    <li>
+                        <p>sala_{{room.id}}</p>
+                        <p>{{roomService.players(room)}}</p>
+                        <button>Join Sala</button>
+                    </li>
+                }
+                
+            </ul>
+       </div>
+       <div class="no-rooms-message" *ngIf="!roomService.getRooms().length"> <!-- Mensaje si no hay salas -->
+            <p>No hay salas disponibles.</p>
+        </div>
+       <article>
+            <h1>$ Create new room</h1>
+            <button (click)="createRoom()" class="create-room-button">Crear Sala</button> <!-- Botón para crear sala -->
+       </article>
+       
+    </div>
+   
+</div>

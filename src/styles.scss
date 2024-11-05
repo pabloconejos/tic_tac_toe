@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15; /* Establece un tamaño de fuente base */
+    -webkit-text-size-adjust: 100%; /* Evita el ajuste automático del tamaño de fuente en dispositivos móviles */
+}
+
+body {
+    font-family: Arial, sans-serif; /* Cambia la fuente a una sans-serif básica */
+    font-size: 16px; /* Tamaño de fuente base */
+    line-height: 1.5; /* Espaciado entre líneas */
+    background-color: #000000; /* Color de fondo */
+    color: #333333; /* Color del texto */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal; /* Establece el peso de la fuente a normal */
+    margin: 0; /* Elimina márgenes de encabezados */
+}
+
+ul, ol {
+    list-style: none; /* Elimina los estilos de lista predeterminados */
+}
+
+a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: inherit; /* Hereda el color del texto */
+}
+
+img {
+    max-width: 100%; /* Asegura que las imágenes no desborden su contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+}
+
+table {
+    border-collapse: collapse; /* Colapsa bordes de tablas */
+    width: 100%; /* Asegura que las tablas ocupen el 100% de su contenedor */
+}
+
+button {
+    border: none; /* Elimina bordes predeterminados */
+    background: none; /* Elimina el fondo predeterminado */
+    font: inherit; /* Hereda la fuente del elemento padre */
+    cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+input, textarea {
+    font: inherit; /* Hereda la fuente del elemento padre */
+    margin: 0; /* Elimina márgenes */
+    padding: 0; /* Elimina paddings */
+    border: none; /* Elimina bordes predeterminados */
+}
