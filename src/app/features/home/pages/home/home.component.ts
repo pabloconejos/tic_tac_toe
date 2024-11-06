@@ -12,7 +12,7 @@ import { ModalServiceService } from '../../../../core/services/modal-service.ser
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy{
 
   constructor(
     private websocketService: WebsocketService,
@@ -23,10 +23,17 @@ export class HomeComponent implements OnInit {
   {
 
   }
+  ngOnDestroy(): void {
+    this.closeRoom(this.roomService.currentRoomId)
+  }
 
   ngOnInit() {
     this.listenEvents()
     this.websocketService.requestAvailableRooms();
+
+    window.onbeforeunload = () => {
+      this.closeRoom(this.roomService.currentRoomId)
+    };
   }
 
   createRoom() {
@@ -57,12 +64,12 @@ export class HomeComponent implements OnInit {
 
       if (result?.tipo == 'close') {
         this.closeRoom(result?.roomId)
-        console.log('Abandonaste la partida')
+        this.handlerMessage('Abandonaste la partida')
         this.roomService.removeCurrentRoomId()
       }
 
       if (!result) {
-        console.log('El otro jugador abandono la partida')
+        this.handlerMessage('El otro jugador abandono la partida')
         this.roomService.removeCurrentRoomId()
       }
     });
@@ -85,7 +92,6 @@ export class HomeComponent implements OnInit {
     });
 
     this.websocketService.onRoomCreated().subscribe((room: any) => {
-      console.log('ROOM FOR ME',room.id);
       this.roomService.currentRoomId = room.id
       const data = {
         jugador1_id: this.userService.getUserId(),
@@ -100,10 +106,10 @@ export class HomeComponent implements OnInit {
     });
 
     this.websocketService.getJoinedRoom().subscribe((room_response: any) => {
-      console.log('joinedRoom',room_response)
-      if(room_response.success == false) { return }
-
-      
+      if(room_response.success == false) { 
+        this.handlerMessage(room_response.message) 
+        return
+      }
 
       const room: Room = room_response
       this.roomService.currentRoomId = room.id
@@ -118,5 +124,9 @@ export class HomeComponent implements OnInit {
 
   closeAllModals() {
     this.dialog.closeAll();
+  }
+
+  handlerMessage(message: string) {
+    console.log(message)
   }
 }
