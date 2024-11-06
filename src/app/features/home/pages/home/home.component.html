@@ -8,18 +8,18 @@
                     <li>
                         <p>sala_{{room.id}}</p>
                         <p>{{roomService.players(room)}}</p>
-                        <button>Join Sala</button>
+                        <button (click)="joinRoom(room.id)">Join Sala</button>
                     </li>
                 }
                 
             </ul>
        </div>
-       <div class="no-rooms-message" *ngIf="!roomService.getRooms().length"> <!-- Mensaje si no hay salas -->
+       <div class="no-rooms-message" *ngIf="!roomService.getRooms().length">
             <p>No hay salas disponibles.</p>
         </div>
        <article>
             <h1>$ Create new room</h1>
-            <button (click)="createRoom()" class="create-room-button">Crear Sala</button> <!-- Botón para crear sala -->
+            <button (click)="createRoom()" class="create-room-button">Crear Sala</button> 
        </article>
        
     </div>

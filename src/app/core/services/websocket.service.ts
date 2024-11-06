@@ -7,13 +7,14 @@ export class WebsocketService extends Socket {
 
   constructor() {
     super({
-      url: 'http://localhost:3000', // Cambia esta URL por la de tu servidor NestJS
+      url: 'http://localhost:3000',
       options: {
-        transports: ['websocket'], // Opcional, dependiendo de tus necesidades
+        transports: ['websocket'],
       },
     });
   }
 
+  /** METODOS PARA RECIBIR */
   // Método para recibir salas disponibles
   onAvailableRooms() {
     return this.fromEvent('availableRooms');
@@ -23,17 +24,29 @@ export class WebsocketService extends Socket {
     return this.fromEvent('connectionStatus')
   }
 
+  getJoinedRoom() {
+    return this.fromEvent('roomJoinedInfo')
+  }
+
+  onRoomCreated() {
+    return this.fromEvent('roomCreatedForYou');
+  }
+
+  /** METODOS PARA EMITIR */
   // Emitir evento para solicitar salas disponibles
   requestAvailableRooms() {
-    this.emit('getAvailableRooms'); // Este evento debe ser manejado en tu servidor
+    this.emit('getAvailableRooms');
   }
 
   createRoom(player1_id: string) {
-    this.emit('createRoom', { player1_id }); // Envía el ID del jugador que crea la sala
+    this.emit('createRoom', { player1_id });
   }
 
-  // Método para escuchar la creación de la sala
-  onRoomCreated() {
-    return this.fromEvent('roomCreatedForYou'); // Asegúrate de que el servidor emita este evento
+  joinRoom(roomId: string, player2_id: string) {
+    this.emit('joinRoom', { roomId, player2_id });
+  }
+
+  closeRoom(roomId: string) {
+    this.emit('closeRoom', { roomId });
   }
 }

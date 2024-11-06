@@ -24,4 +24,8 @@ export class RoomService {
     return room.jugador2_id ? '2/2' : '1/2'
   }
 
+  removeCurrentRoomId() {
+    this.currentRoomId = ''
+  }
+
 }

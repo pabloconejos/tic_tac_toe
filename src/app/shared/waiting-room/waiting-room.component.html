@@ -1,0 +1,22 @@
+<div class="terminal-header">
+    <span class="title">Sala de Espera - Tic Tac Toe</span>
+    <span class="controls">
+      &#x25A0; &#x25A1; <p (click)="cerrarPartida()">x</p>
+    </span>
+  </div>
+  
+  <div class="terminal-body">
+    <p>ID de la Sala: <strong>{{ data.id }}</strong></p>
+  
+    <div class="player-info">
+      <p>Jugador 1: <strong>{{ data.jugador1_id || 'Esperando...' }}</strong></p>
+      <p>Jugador 2: <strong>{{ data.jugador2_id || 'Esperando...' }}</strong></p>
+    </div>
+  
+    <p *ngIf="!data.jugador2_id">Esperando a que el jugador 2 se una...</p>
+  
+    <button class="start-button" [disabled]="!data.jugador1_id || !data.jugador2_id" (click)="empezarPartida()">
+      Empezar Partida
+    </button>
+  </div>
+  

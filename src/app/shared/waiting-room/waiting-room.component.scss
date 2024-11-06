@@ -1,0 +1,54 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    background-color: #000000;
+    padding: 30px; /* Aumentar padding */
+    width: 100%; /* Cambiar ancho */
+    max-width: 800px; /* Aumentar el tamaño máximo del modal */
+}
+
+.terminal-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px; /* Aumentar padding */
+    font-size: 16px; /* Aumentar tamaño de fuente */
+    border-bottom: 1px solid #00ff00;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.terminal-body {
+    background-color: #000;
+    color: #00ff00;
+    padding: 20px; /* Aumentar padding */
+    font-size: 16px; /* Aumentar tamaño de fuente */
+    width: 100%;
+    text-align: left;
+}
+
+.player-info p {
+    margin: 10px 0; /* Aumentar espaciado */
+}
+
+.start-button {
+    margin-top: 20px;
+    background-color: #333;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 10px 20px; /* Aumentar padding */
+    cursor: pointer;
+    font-size: 16px; /* Aumentar tamaño de fuente */
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
