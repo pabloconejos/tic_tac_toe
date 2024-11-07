@@ -51,6 +51,6 @@ export class WebsocketService extends Socket {
   }
 
   closeRoom(roomId: string) {
-    this.emit('closeRoom', { roomId });
+    this.emit('closeRoom', roomId );
   }
 }

@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       const e = rooms.filter((room: Room) => room.id == this.roomService.currentRoomId)
       console.log(e)
       if(e.length >= 1) {
-        this.modalService.updateRoomData(e[0]);
+        this.modalService.updateRoomData(e[0]); // ACTUALIZAR WAITING ROOM CUANDO SE UNE EL J1
       } else {
         this.closeAllModals()
       }
@@ -107,7 +107,6 @@ export class HomeComponent implements OnInit, OnDestroy{
     });
 
     this.websocketService.onRoomReady().subscribe((response: any) => {
-      console.log(response)
       const room: Room = response.roomInfo
       this.roomService.currentRoomId = room.id
       const data = {
@@ -115,7 +114,9 @@ export class HomeComponent implements OnInit, OnDestroy{
         jugador2_id: room.jugador2_id,
         id: room.id
       }
-      this.abrirSalaEspera(data)
+      console.log('se abre')
+      // TODO => SI ABRO AQUI LA WAITING ROOM EN EL CLIENTE QUE YA LA TIENE ABIERTA SE ABRE DOS VECES
+      // this.abrirSalaEspera(data)
       this.modalService.updateRoomData(data);
     })
   }
