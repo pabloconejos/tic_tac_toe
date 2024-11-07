@@ -1,30 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { WebsocketService } from '../../../../core/services/websocket.service';
-import { RoomService } from '../../../../core/services/room.service';
-import { Room } from '../../../../interfaces/Room';
-import { UserService } from '../../../../core/services/user.service';
+import { Component, OnInit } from '@angular/core';
+import { IRoom, RoomPlayers } from '../../../../interfaces/Room';
 import { MatDialog } from '@angular/material/dialog';
 import { WaitingRoomComponent } from '../../../../shared/waiting-room/waiting-room.component';
-import { ModalServiceService } from '../../../../core/services/modal-service.service';
+import { Router } from '@angular/router';
+
+import { ModalServiceService, WebsocketService, RoomService, UserService } from '@core/services';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit{
 
   constructor(
     private websocketService: WebsocketService,
     public roomService: RoomService,
     public userService: UserService,
     private dialog: MatDialog,
-    private modalService: ModalServiceService) 
+    private modalService: ModalServiceService,
+    private router: Router) 
   {
 
-  }
-  ngOnDestroy(): void {
-    this.closeRoom(this.roomService.currentRoomId)
   }
 
   ngOnInit() {
@@ -59,8 +56,9 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result?.iniciar) {
-        
+      console.log(result)
+      if (result?.tipo == "iniciar") {
+        this.websocketService.startPlay(result?.roomId)
       }
 
       if (result?.tipo == 'close') {
@@ -77,12 +75,12 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   listenEvents() {
-    this.websocketService.onAvailableRooms().subscribe((rooms: any) => {
+    this.websocketService.onAvailableRooms().subscribe((rooms: IRoom[]) => {
       this.roomService.setRooms(rooms)
       if (!this.roomService.currentRoomId) {
         return
       }
-      const e = rooms.filter((room: Room) => room.id == this.roomService.currentRoomId)
+      const e = rooms.filter((room: IRoom) => room.id == this.roomService.currentRoomId)
       console.log(e)
       if(e.length >= 1) {
         this.modalService.updateRoomData(e[0]); // ACTUALIZAR WAITING ROOM CUANDO SE UNE EL J1
@@ -92,7 +90,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     });
 
-    this.websocketService.onRoomCreated().subscribe((room: any) => {
+    this.websocketService.onRoomCreated().subscribe((room: {id: string, romm: IRoom}) => {
       this.roomService.currentRoomId = room.id
       const data = {
         jugador1_id: this.userService.getUserId(),
@@ -102,22 +100,30 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.abrirSalaEspera(data)
     });
 
-    this.websocketService.getWebSocketId().subscribe((user: any) => {
+    this.websocketService.getWebSocketId().subscribe((user: {id: string}) => {
       this.userService.setUserId(user.id)
     });
 
-    this.websocketService.onRoomReady().subscribe((response: any) => {
-      const room: Room = response.roomInfo
+    this.websocketService.onRoomReadyToStart().subscribe((response: RoomPlayers) => {
+      const room: IRoom = response.roomInfo
       this.roomService.currentRoomId = room.id
       const data = {
         jugador1_id: room.jugador1_id,
         jugador2_id: room.jugador2_id,
         id: room.id
       }
-      console.log('se abre')
-      // TODO => SI ABRO AQUI LA WAITING ROOM EN EL CLIENTE QUE YA LA TIENE ABIERTA SE ABRE DOS VECES
-      // this.abrirSalaEspera(data)
       this.modalService.updateRoomData(data);
+    })
+
+    this.websocketService.getJoinedRoom().subscribe((room: IRoom) => {
+      this.abrirSalaEspera(room)
+    })
+
+    this.websocketService.onStartPlay().subscribe((response: any) => {
+      console.log(response.message)
+      this.closeAllModals()
+      this.router.navigate(['/room', response.roomId]);
+
     })
   }
 

@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Room } from '../../interfaces/Room';
+import { IRoom } from '../../interfaces/Room';
 import { Subscription } from 'rxjs';
 import { ModalServiceService } from '../../core/services/modal-service.service';
 import { UserService } from '../../core/services/user.service';
@@ -15,7 +15,7 @@ export class WaitingRoomComponent implements OnInit{
   private dataSubscription!: Subscription;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Room, 
+    @Inject(MAT_DIALOG_DATA) public data: IRoom, 
     private modalService: ModalServiceService,
     private dialogRef: MatDialogRef<WaitingRoomComponent>,  // Inyecta MatDialogRef aquí
     public userService: UserService
@@ -37,7 +37,8 @@ export class WaitingRoomComponent implements OnInit{
   }
 
   empezarPartida() {
-   console.log('EMPEZAR PATIDA!')
+    const result = { success: true, message: 'Iniciar partida', tipo: 'iniciar', roomId: this.data.id };
+    this.dialogRef.close(result);
   }
 
   cerrarPartida() {

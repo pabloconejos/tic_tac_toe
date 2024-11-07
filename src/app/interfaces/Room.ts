@@ -1,4 +1,4 @@
-export interface Room {
+export interface IRoom {
     id: string;
     estado: 'waiting' | 'in_progress' | 'finished';
     turno: 1 | 2;
@@ -9,3 +9,8 @@ export interface Room {
     ganador?: number;
 }
   
+export interface RoomPlayers {
+    roomId: string,
+    players: string[],
+    roomInfo: IRoom,
+}

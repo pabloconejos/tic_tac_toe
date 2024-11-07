@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io'
+import { IRoom, RoomPlayers } from '../../interfaces/Room';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,29 +18,31 @@ export class WebsocketService extends Socket {
   }
 
   /** METODOS PARA RECIBIR */
-  // Método para recibir salas disponibles
-  onAvailableRooms() {
-    return this.fromEvent('availableRooms');
+  onAvailableRooms(): Observable<IRoom[]> {
+    return this.fromEvent<IRoom[]>('availableRooms');
   }
 
-  getWebSocketId() {
-    return this.fromEvent('connectionStatus')
+  getWebSocketId():Observable<{id: string}> {
+    return this.fromEvent<{id: string}>('connectionStatus')
   }
 
-  getJoinedRoom() {
-    return this.fromEvent('joinedRoom')
+  getJoinedRoom(): Observable<IRoom> {
+    return this.fromEvent<IRoom>('joinedRoom');
   }
 
-  onRoomCreated() {
-    return this.fromEvent('roomCreatedForYou');
+  onRoomCreated(): Observable<{id: string, romm: IRoom}> {
+    return this.fromEvent<{id: string, romm: IRoom}>('roomCreatedForYou');
   }
 
-  onRoomReady() {
-    return this.fromEvent('readyToStart')
+  onRoomReadyToStart(): Observable<RoomPlayers> {
+    return this.fromEvent<RoomPlayers>('readyToStart')
+  }
+
+  onStartPlay(): Observable<any> {
+    return this.fromEvent<any>('startPlay')
   }
 
   /** METODOS PARA EMITIR */
-  // Emitir evento para solicitar salas disponibles
   requestAvailableRooms() {
     this.emit('getAvailableRooms');
   }
@@ -52,5 +57,9 @@ export class WebsocketService extends Socket {
 
   closeRoom(roomId: string) {
     this.emit('closeRoom', roomId );
+  }
+
+  startPlay(roomId: string) {
+    this.emit('startPlay', roomId );
   }
 }

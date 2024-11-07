@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Room } from '../../interfaces/Room';
+import { IRoom } from '../../interfaces/Room';
 @Injectable({
   providedIn: 'root'
 })
 export class ModalServiceService {
 
-  private roomDataSubject = new BehaviorSubject<Room>({
+  private roomDataSubject = new BehaviorSubject<IRoom>({
     id: '',
     estado: 'waiting',
     turno: 1,
