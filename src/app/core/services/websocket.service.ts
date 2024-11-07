@@ -25,11 +25,15 @@ export class WebsocketService extends Socket {
   }
 
   getJoinedRoom() {
-    return this.fromEvent('roomJoinedInfo')
+    return this.fromEvent('joinedRoom')
   }
 
   onRoomCreated() {
     return this.fromEvent('roomCreatedForYou');
+  }
+
+  onRoomReady() {
+    return this.fromEvent('readyToStart')
   }
 
   /** METODOS PARA EMITIR */
@@ -43,7 +47,7 @@ export class WebsocketService extends Socket {
   }
 
   joinRoom(roomId: string, player2_id: string) {
-    this.emit('joinRoom', { roomId, player2_id });
+    this.emit('joinRoom', roomId );
   }
 
   closeRoom(roomId: string) {

@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.websocketService.requestAvailableRooms();
 
     window.onbeforeunload = () => {
+      if (!this.roomService.currentRoomId) { return }
       this.closeRoom(this.roomService.currentRoomId)
     };
   }
@@ -105,13 +106,9 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.userService.setUserId(user.id)
     });
 
-    this.websocketService.getJoinedRoom().subscribe((room_response: any) => {
-      if(room_response.success == false) { 
-        this.handlerMessage(room_response.message) 
-        return
-      }
-
-      const room: Room = room_response
+    this.websocketService.onRoomReady().subscribe((response: any) => {
+      console.log(response)
+      const room: Room = response.roomInfo
       this.roomService.currentRoomId = room.id
       const data = {
         jugador1_id: room.jugador1_id,
@@ -119,7 +116,8 @@ export class HomeComponent implements OnInit, OnDestroy{
         id: room.id
       }
       this.abrirSalaEspera(data)
-    });
+      this.modalService.updateRoomData(data);
+    })
   }
 
   closeAllModals() {
