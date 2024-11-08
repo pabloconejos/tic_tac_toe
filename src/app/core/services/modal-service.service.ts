@@ -8,13 +8,13 @@ export class ModalServiceService {
 
   private roomDataSubject = new BehaviorSubject<IRoom>({
     id: '',
-    estado: 'waiting',
-    turno: 1,
-    tablero: '',
+    state: 'waiting',
+    turn: 'X',
+    board: [],
     jugador1_id: '',
     jugador2_id: '',
-    fecha_creacion: new Date(),
-    ganador: 0,
+    date_creation: new Date(),
+    winner: 0,
   });
 
   roomData$ = this.roomDataSubject.asObservable(); 

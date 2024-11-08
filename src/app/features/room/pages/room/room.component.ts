@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RoomService, UserService } from '@core/services';
 import { CookieService } from 'ngx-cookie-service';
+import { WebsocketService } from '../../../../core/services/websocket.service';
+import { IRoom } from 'src/app/interfaces/Room';
 
 @Component({
   selector: 'app-room',
@@ -9,16 +12,75 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class RoomComponent implements OnInit{
 
-  room: string | undefined;
+  currentPlayer: string = 'X';
+  winner: string | null = null;
+
   constructor(
-    private router: ActivatedRoute, 
-    private cookieService: CookieService) 
+    private cookieService: CookieService,
+    public roomService: RoomService,
+    private userService: UserService,
+    private websocketService: WebsocketService) 
   {
 
   }
+
   ngOnInit(): void {
-    this.room = this.router.snapshot.paramMap.get('id') ?? ''
-    this.cookieService.set('tic_tac_toe-room', this.room)
+    const room = this.roomService.currentRoom.id
+    this.cookieService.set('tic_tac_toe-room', room)
+    console.log(this.roomService.currentRoom)
+    this.roomService.initBoard()
+    this.listenEvents()
   }
+  
+  listenEvents() {
+    this.websocketService.onUpdateBoard().subscribe((room: IRoom) => {
+      console.log(room)
+      this.roomService.currentRoom = room // TODO => AQUI PETA PORQUE LO QUE TENDRIA QUE SER UN ARRAY ES = ,,,,1,1,,,,1
+    })
+  }
+
+  playMove(index: number): void {
+    console.log(this.userService.marker + ' === ' + this.currentPlayer)
+    if (!this.roomService.currentRoom.board[index] && !this.winner && this.userService.marker === this.currentPlayer) {
+      this.roomService.currentRoom.board[index] = this.currentPlayer;
+      if (this.checkWinner()) {
+        this.winner = this.currentPlayer;
+      } else {
+        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+      }
+      this.roomService.updateBoard(this.roomService.currentRoom.board)
+    }
+  }
+
+  // HACERLO EN EL BACK
+  checkWinner(): boolean {
+    const winningCombinations = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // filas
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columnas
+      [0, 4, 8], [2, 4, 6]             // diagonales
+    ];
+    return winningCombinations.some(combination =>
+      combination.every(index => this.roomService.currentRoom.board[index] === this.currentPlayer)
+    );
+  }
+
+  resetGame(): void {
+    this.roomService.currentRoom.board.fill('');
+    this.currentPlayer = 'X';
+    this.winner = null;
+  }
+
+
+  getPlayer() {
+    if (this.userService.getUserId() == this.roomService.currentRoom.jugador1_id) {
+      this.userService.marker = 'X'
+      return 'X'
+    }
+
+    this.userService.marker = 'O'
+    return 'O'
+    
+  }
+
 
 }

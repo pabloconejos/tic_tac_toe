@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   private webSocketUserId!: string
+  public marker: string = ''
 
   constructor() { }
 

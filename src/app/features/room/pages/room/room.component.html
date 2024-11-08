@@ -1,1 +1,16 @@
-<p>room works!</p>
+<div *ngIf="roomService.currentRoom" class="game-container">
+  <h2>Tu eres player: {{ getPlayer() }}</h2>
+    <div class="game">
+        <h2>Turno de: {{ roomService.currentRoom.turn }}</h2>
+        <div *ngIf="winner" class="winner">¡{{ roomService.currentRoom.winner }} ha ganado!</div>
+        <div class="board">
+          <div 
+            *ngFor="let cell of roomService.currentRoom.board; let i = index" 
+            (click)="playMove(i)" 
+            class="cell">
+            {{ cell }}
+          </div>
+        </div>
+    </div>
+</div>
+  

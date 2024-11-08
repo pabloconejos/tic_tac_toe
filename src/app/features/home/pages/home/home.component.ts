@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
 
-      console.log(result)
       if (result?.tipo == "iniciar") {
         this.websocketService.startPlay(result?.roomId)
       }
@@ -67,7 +66,7 @@ export class HomeComponent implements OnInit{
         this.roomService.removeCurrentRoomId()
       }
 
-      if (!result) {
+      if (!result && !this.roomService.currentRoom) {
         this.handlerMessage('El otro jugador abandono la partida')
         this.roomService.removeCurrentRoomId()
       }
@@ -101,6 +100,7 @@ export class HomeComponent implements OnInit{
     });
 
     this.websocketService.getWebSocketId().subscribe((user: {id: string}) => {
+      console.log('ID => ', user)
       this.userService.setUserId(user.id)
     });
 
@@ -119,10 +119,10 @@ export class HomeComponent implements OnInit{
       this.abrirSalaEspera(room)
     })
 
-    this.websocketService.onStartPlay().subscribe((response: any) => {
-      console.log(response.message)
+    this.websocketService.onStartPlay().subscribe((room: IRoom) => {
+      this.roomService.currentRoom = room
       this.closeAllModals()
-      this.router.navigate(['/room', response.roomId]);
+      this.router.navigate(['/room', room.id]);
 
     })
   }

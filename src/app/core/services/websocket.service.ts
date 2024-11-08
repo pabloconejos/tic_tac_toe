@@ -42,6 +42,10 @@ export class WebsocketService extends Socket {
     return this.fromEvent<any>('startPlay')
   }
 
+  onUpdateBoard(): Observable<IRoom> {
+    return this.fromEvent<IRoom>('updateBoard')
+  }
+
   /** METODOS PARA EMITIR */
   requestAvailableRooms() {
     this.emit('getAvailableRooms');
@@ -61,5 +65,9 @@ export class WebsocketService extends Socket {
 
   startPlay(roomId: string) {
     this.emit('startPlay', roomId );
+  }
+
+  updateBoard(board: string[]) {
+    this.emit('updateBoard', {board} );
   }
 }

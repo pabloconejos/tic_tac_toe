@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IRoom } from '../../interfaces/Room';
+import { WebsocketService } from './websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,10 @@ import { IRoom } from '../../interfaces/Room';
 export class RoomService {
 
   currentRoomId!: string;
-  currentRoom!: IRoom;
+  currentRoom!: IRoom;  
   private rooms: IRoom[] = []
 
-  constructor() { }
+  constructor(private webSocketService: WebsocketService) { }
 
   setRooms(rooms: IRoom[]) {
     this.rooms = rooms
@@ -26,6 +27,14 @@ export class RoomService {
 
   removeCurrentRoomId() {
     this.currentRoomId = ''
+  }
+
+  updateBoard(board: string[]) {
+    this.webSocketService.updateBoard(board);
+  }
+
+  initBoard() {
+    this.currentRoom.board = Array(9).fill('');
   }
 
 }
