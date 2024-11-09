@@ -46,6 +46,11 @@ export class WebsocketService extends Socket {
     return this.fromEvent<IRoom>('updateBoard')
   }
 
+  onError(): Observable<{ message: string }> {
+    return this.fromEvent<{ message: string }>('error');
+  }
+  
+
   /** METODOS PARA EMITIR */
   requestAvailableRooms() {
     this.emit('getAvailableRooms');

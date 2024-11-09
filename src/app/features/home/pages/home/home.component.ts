@@ -124,6 +124,10 @@ export class HomeComponent implements OnInit{
       this.router.navigate(['/room', room.id]);
 
     })
+
+    this.websocketService.onError().subscribe((error) => {
+      console.error('Error recibido:', error.message);
+    });
   }
 
   closeAllModals() {
