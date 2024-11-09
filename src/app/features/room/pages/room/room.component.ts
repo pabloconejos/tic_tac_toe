@@ -12,7 +12,6 @@ import { IRoom } from 'src/app/interfaces/Room';
 })
 export class RoomComponent implements OnInit{
 
-  currentPlayer: string = 'X';
   winner: string | null = null;
 
   constructor(
@@ -40,13 +39,10 @@ export class RoomComponent implements OnInit{
   }
 
   playMove(index: number): void {
-    console.log(this.userService.marker + ' === ' + this.currentPlayer)
-    if (!this.roomService.currentRoom.board[index] && !this.winner && this.userService.marker === this.currentPlayer) {
-      this.roomService.currentRoom.board[index] = this.currentPlayer;
+    if (!this.roomService.currentRoom.board[index] && !this.winner && this.userService.marker === this.roomService.currentRoom.turn) {
+      this.roomService.currentRoom.board[index] = this.roomService.currentRoom.turn;
       if (this.checkWinner()) {
-        this.winner = this.currentPlayer;
-      } else {
-        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+        this.winner = this.roomService.currentRoom.turn;
       }
       this.roomService.updateBoard(this.roomService.currentRoom.board)
     }
@@ -60,14 +56,8 @@ export class RoomComponent implements OnInit{
       [0, 4, 8], [2, 4, 6]             // diagonales
     ];
     return winningCombinations.some(combination =>
-      combination.every(index => this.roomService.currentRoom.board[index] === this.currentPlayer)
+      combination.every(index => this.roomService.currentRoom.board[index] === this.roomService.currentRoom.turn)
     );
-  }
-
-  resetGame(): void {
-    this.roomService.currentRoom.board.fill('');
-    this.currentPlayer = 'X';
-    this.winner = null;
   }
 
 
