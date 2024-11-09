@@ -29,8 +29,8 @@ export class RoomService {
     this.currentRoomId = ''
   }
 
-  updateBoard(board: string[]) {
-    this.webSocketService.updateBoard(board);
+  updateBoard(room: IRoom) {
+    this.webSocketService.updateBoard(room);
   }
 
   initBoard() {

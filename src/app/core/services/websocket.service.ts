@@ -67,7 +67,7 @@ export class WebsocketService extends Socket {
     this.emit('startPlay', roomId );
   }
 
-  updateBoard(board: string[]) {
-    this.emit('updateBoard', {board} );
+  updateBoard(room: IRoom) {
+    this.emit('updateBoard', room );
   }
 }
