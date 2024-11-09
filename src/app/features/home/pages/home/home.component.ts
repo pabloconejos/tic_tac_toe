@@ -100,7 +100,6 @@ export class HomeComponent implements OnInit{
     });
 
     this.websocketService.getWebSocketId().subscribe((user: {id: string}) => {
-      console.log('ID => ', user)
       this.userService.setUserId(user.id)
     });
 
