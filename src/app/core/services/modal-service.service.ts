@@ -14,7 +14,7 @@ export class ModalServiceService {
     jugador1_id: '',
     jugador2_id: '',
     date_creation: new Date(),
-    winner: 0,
+    winner: '',
   });
 
   roomData$ = this.roomDataSubject.asObservable(); 

@@ -7,11 +7,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { WaitingRoomComponent } from './shared/waiting-room/waiting-room.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
+import { WinnerModalComponent } from './shared/winner-modal/winner-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WaitingRoomComponent
+    WaitingRoomComponent,
+    WinnerModalComponent
   ],
   imports: [
     BrowserModule,

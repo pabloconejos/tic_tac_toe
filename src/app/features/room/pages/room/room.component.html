@@ -1,6 +1,6 @@
 <div *ngIf="roomService.currentRoom" class="game-container">
-  <h2>Tu eres player: {{ getPlayer() }}</h2>
     <div class="game">
+      <h2>Tu eres player: {{ getPlayer() }}</h2>
         <h2>Turno de: {{ roomService.currentRoom.turn }}</h2>
         <div *ngIf="roomService.currentRoom.winner" class="winner">¡{{ roomService.currentRoom.winner }} ha ganado!</div>
         <div class="board">

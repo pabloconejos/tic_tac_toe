@@ -6,7 +6,7 @@ export interface IRoom {
     jugador1_id?: string;
     jugador2_id?: string;
     date_creation?: Date;
-    winner?: number;
+    winner?: string;
 }
   
 export interface RoomPlayers {

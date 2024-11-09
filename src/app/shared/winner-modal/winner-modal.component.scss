@@ -1,0 +1,51 @@
+/* ganador-modal.component.css */
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff00;
+    background-color: #000000;
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.terminal-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #00ff00;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.terminal-body {
+    background-color: #000;
+    color: #00ff00;
+    padding: 20px;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.menu-button {
+    margin-top: 20px;
+    background-color: #333;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}

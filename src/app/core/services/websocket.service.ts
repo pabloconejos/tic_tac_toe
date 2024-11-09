@@ -49,6 +49,10 @@ export class WebsocketService extends Socket {
   onError(): Observable<{ message: string }> {
     return this.fromEvent<{ message: string }>('error');
   }
+
+  roomClosed(): Observable<string> {
+    return this.fromEvent<string>('roomClosed');
+  }
   
 
   /** METODOS PARA EMITIR */
