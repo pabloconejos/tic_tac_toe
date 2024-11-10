@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IRoom, RoomPlayers } from '../../../../interfaces/Room';
 import { MatDialog } from '@angular/material/dialog';
 import { WaitingRoomComponent } from '../../../../shared/waiting-room/waiting-room.component';
 import { Router } from '@angular/router';
-
 import { ModalServiceService, WebsocketService, RoomService, UserService } from '@core/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy{
+
+  private subscriptions: Subscription[] = [];
+
 
   constructor(
     private websocketService: WebsocketService,
@@ -32,6 +35,11 @@ export class HomeComponent implements OnInit{
       if (!this.roomService.currentRoomId) { return }
       this.closeRoom(this.roomService.currentRoomId)
     };
+  }
+
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   createRoom() {
@@ -74,67 +82,82 @@ export class HomeComponent implements OnInit{
   }
 
   listenEvents() {
-    this.websocketService.onAvailableRooms().subscribe((rooms: IRoom[]) => {
-      this.roomService.setRooms(rooms)
-      if (!this.roomService.currentRoomId) {
-        return
-      }
-      const e = rooms.filter((room: IRoom) => room.id == this.roomService.currentRoomId)
-      console.log(e)
-      if(e.length >= 1) {
-        this.modalService.updateRoomData(e[0]); // ACTUALIZAR WAITING ROOM CUANDO SE UNE EL J1
-      } else {
+    this.subscriptions.push(
+      this.websocketService.onAvailableRooms().subscribe((rooms: IRoom[]) => {
+        this.roomService.setRooms(rooms)
+        if (!this.roomService.currentRoomId) {
+          return
+        }
+      })
+    );
+    
+    this.subscriptions.push(
+      this.websocketService.onRoomCreated().subscribe((room: {id: string, room: IRoom}) => {
+        this.roomService.currentRoomId = room.id
+        this.modalService.updateRoomData(room.room)
+        const data = {
+          jugador1_id: this.userService.getUserId(),
+          jugador2_id: null,
+          id: room.id
+        }
+        this.abrirSalaEspera(data)
+      })
+    );
+
+    this.subscriptions.push(
+      this.websocketService.getWebSocketId().subscribe((user: {id: string}) => {
+        this.userService.setUserId(user.id)
+      })
+    );
+
+    this.subscriptions.push(
+      this.websocketService.onRoomReadyToStart().subscribe((response: RoomPlayers) => {
+        const room: IRoom = response.roomInfo
+        this.modalService.updateRoomData(room)
+        this.roomService.currentRoomId = room.id
+        const data = {
+          jugador1_id: room.jugador1_id,
+          jugador2_id: room.jugador2_id,
+          id: room.id
+        }
+        this.modalService.updateRoomData(data);
+      })
+    );
+
+    this.subscriptions.push(
+      this.websocketService.getJoinedRoom().subscribe((room: IRoom) => {
+        this.abrirSalaEspera(room)
+      })
+    );
+
+    this.subscriptions.push(
+      this.websocketService.onStartPlay().subscribe((room: IRoom) => {
+        this.roomService.currentRoom = room
+        console.log('closeAllModals => onStartPlay')
         this.closeAllModals()
-      }
+        this.router.navigate(['/room', room.id]);
+      })
+    );
 
-    });
+    this.subscriptions.push(
+      this.websocketService.roomClosed().subscribe((roomId: string) => {
+        console.log('closeAllModals => roomClosed')
+        this.closeAllModals();
+      })
+    );
 
-    this.websocketService.onRoomCreated().subscribe((room: {id: string, romm: IRoom}) => {
-      this.roomService.currentRoomId = room.id
-      const data = {
-        jugador1_id: this.userService.getUserId(),
-        jugador2_id: null,
-        id: room.id
-      }
-      this.abrirSalaEspera(data)
-    });
-
-    this.websocketService.getWebSocketId().subscribe((user: {id: string}) => {
-      this.userService.setUserId(user.id)
-    });
-
-    this.websocketService.onRoomReadyToStart().subscribe((response: RoomPlayers) => {
-      const room: IRoom = response.roomInfo
-      this.roomService.currentRoomId = room.id
-      const data = {
-        jugador1_id: room.jugador1_id,
-        jugador2_id: room.jugador2_id,
-        id: room.id
-      }
-      this.modalService.updateRoomData(data);
-    })
-
-    this.websocketService.getJoinedRoom().subscribe((room: IRoom) => {
-      this.abrirSalaEspera(room)
-    })
-
-    this.websocketService.onStartPlay().subscribe((room: IRoom) => {
-      this.roomService.currentRoom = room
-      this.closeAllModals()
-      this.router.navigate(['/room', room.id]);
-
-    })
-
-    this.websocketService.onError().subscribe((error) => {
-      console.error('Error recibido:', error.message);
-    });
+    this.subscriptions.push(
+      this.websocketService.onError().subscribe((error) => {
+        console.error('Error recibido:', error.message);
+      })
+    );
   }
 
   closeAllModals() {
+    console.log('closeAllModals')
     this.dialog.closeAll();
   }
 
   handlerMessage(message: string) {
-    console.log(message)
   }
 }

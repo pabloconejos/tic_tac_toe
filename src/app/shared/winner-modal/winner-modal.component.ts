@@ -9,8 +9,7 @@ import { ModalServiceService } from '@core/services';
 })
 export class WinnerModalComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {winnwe: boolean, message: string}, 
-    private modalService: ModalServiceService,
+    @Inject(MAT_DIALOG_DATA) public data: {winner: boolean, message: string}, 
     private dialogRef: MatDialogRef<WinnerModalComponent>,
   ) { }
 

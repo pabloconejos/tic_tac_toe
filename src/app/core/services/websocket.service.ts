@@ -30,8 +30,8 @@ export class WebsocketService extends Socket {
     return this.fromEvent<IRoom>('joinedRoom');
   }
 
-  onRoomCreated(): Observable<{id: string, romm: IRoom}> {
-    return this.fromEvent<{id: string, romm: IRoom}>('roomCreatedForYou');
+  onRoomCreated(): Observable<{id: string, room: IRoom}> {
+    return this.fromEvent<{id: string, room: IRoom}>('roomCreatedForYou');
   }
 
   onRoomReadyToStart(): Observable<RoomPlayers> {
