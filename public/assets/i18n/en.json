@@ -18,6 +18,11 @@
     "turno_de": "Turn of: ",
     "ha_ganado": "has won!",
     "jugada": "Move",
-    "jugadores": "Players"
+    "jugadores": "Players",
+    "game": {
+        "win": "Congratulations! You have won the game.",
+        "lose": "You lost :( The other player won the game.",
+        "tie": "It's a tie :( Go back to the main menu and play another game."
+    }
 }
   

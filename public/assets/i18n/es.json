@@ -18,7 +18,11 @@
     "turno_de": "Turno de: ",
     "ha_ganado": "ha ganado!",
     "jugada": "Jugada",
-    "jugadores": "Jugadores"
-
+    "jugadores": "Jugadores",
+    "game": {
+        "win": "¡Felicitaciones! Has ganado la partida.",
+        "lose": "Perdiste :( El otro jugador ganó la partida.",
+        "tie": "Ha habido un empate :( Vuelve al menú principal y juega otra partida."
+    }
 }
   
