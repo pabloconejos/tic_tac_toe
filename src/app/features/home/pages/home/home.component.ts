@@ -30,11 +30,13 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    console.log('ngOnInit')
     this.listenEvents()
     this.websocketService.requestAvailableRooms();
 
     window.onbeforeunload = () => {
       if (!this.roomService.currentRoomId) { return }
+      this.subscriptions.forEach(sub => sub.unsubscribe());
       this.closeRoom(this.roomService.currentRoomId)
     };
   }
@@ -65,7 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      console.log(result)
       if (result?.tipo == "iniciar") {
         this.websocketService.startPlay(result?.roomId)
       }

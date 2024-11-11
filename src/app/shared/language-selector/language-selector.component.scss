@@ -8,10 +8,11 @@
     align-items: center;
     gap: 10px;
     border: 2px solid #00ff00;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 20px;
+    min-width: 300px;
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    // margin: 20px;
   }
   
   .language-label {
@@ -21,10 +22,11 @@
   select {
     background-color: black;
     color: #33ff33;
-    border: 1px solid #00ff00;
+    border: none;
     padding: 5px;
     font-size: 1em;
     font-family: 'Courier New', monospace;
+    width: 100%;
   }
   
   select:focus {
@@ -36,4 +38,35 @@
     background-color: black;
     color: green;
   }
+
+  p {
+    font-size: 16px; /* Tamaño por defecto para pantallas grandes */
+    line-height: 1.5; /* Espaciado entre líneas */
+    margin-bottom: 1rem; /* Espacio inferior para separar los párrafos */
+  }
   
+@media (min-width: 1024px) {
+  .terminal-style {
+    min-width: 300px;
+  }
+}
+  
+@media (min-width: 768px) and (max-width: 1023px) {
+  .terminal-style {
+    min-width: 200px;
+  }
+
+  p {
+    font-size: 14px; /* Ajustado para pantallas de tablet */
+  }
+}
+  
+@media (max-width: 767px) {
+  .terminal-style {
+    min-width: 10px;
+  }
+
+  p {
+    font-size: 12px; /* Ajustado para pantallas de móvil */
+  }
+}

@@ -40,13 +40,16 @@ export class RoomComponent implements OnInit, OnDestroy{
     console.log('ngOnInit')
     if (!this.roomService.currentRoom) {
       this.router.navigate(['/home']);
+      return
     }
 
-    console.log(this.roomService.currentRoom)
-    const room = this.roomService.currentRoom.id ?? ''
-    this.cookieService.set('tic_tac_toe-room', room)
-    this.roomService.initBoard()
-    this.listenEvents()
+    if (this.roomService.currentRoom) {
+      const room = this.roomService.currentRoom.id ?? ''
+      this.cookieService.set('tic_tac_toe-room', room)
+      this.roomService.initBoard()
+      this.listenEvents()
+    }
+    
   }
   
   listenEvents() {

@@ -1,26 +1,48 @@
 <div class="main-section cdk-overlay-pane">
-    <app-language-selector></app-language-selector>
     <div class="terminal">
-        <h1>$ user_id => {{ userService.getUserId() }}</h1>
-        <div class="salas-container">
-            <h1>$ ls {{ 'salas_disponibles' | translate }}</h1>
+        <header>
+            <div class="title">
+                <img src="assets/icons/gameController.svg" alt="">
+                <h1>Tic Tac Toe</h1>
+            </div>
+            <app-language-selector></app-language-selector>
+        </header>
+       
+        <article class="terminal-section user-section">
+            <div class="title">
+                <img src="assets/icons/terminal.svg" alt="">
+                <h1>user_id</h1>
+            </div>
+            <h1 class="user-id">{{ userService.getUserId() }}</h1>
+        </article>
+        
+        <div class="terminal-section salas-container">
+            <div class="rooms-title">
+                <img src="assets/icons/users.svg" alt="">
+                <h1>ls {{ 'salas_disponibles' | translate }}</h1>
+            </div>
+            
             <ul>
                 @for (room of roomService.getRooms(); track room.id) {
-                    <li>
-                        <p>{{ 'sala' + room.id | translate }}</p>
-                        <p>{{ roomService.players(room) }}</p>
+                    <li class="terminal-section">
+                        <div class="info-room">
+                            <p>{{ 'sala_' + room.id | translate }}</p>
+                            <p> {{'jugadores' | translate }} {{ roomService.players(room) }}</p>
+                        </div>
                         <button (click)="joinRoom(room.id)">{{ 'join_room_button' | translate }}</button>
                     </li>
                 }
                 
             </ul>
        </div>
+       
        <div class="no-rooms-message" *ngIf="!roomService.getRooms().length">
+            <img src="assets/icons/alert.svg" alt="">
             <p>{{ 'no_rooms_message' | translate }}</p>
         </div>
+
        <article>
-            <h1>$ {{ 'create_new_room' | translate }}</h1>
-            <button (click)="createRoom()" class="create-room-button">{{ 'create_room_button' | translate }}</button>
+            <button (click)="createRoom()" class="create-room-button">+ {{ 'create_new_room' | translate }}</button>
        </article>
        
     </div>

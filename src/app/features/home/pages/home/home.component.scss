@@ -7,27 +7,83 @@
     align-items: center;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+        display: flex;
+        gap: 8px;
+        justify-content: start;
+        align-items: center;
+
+        h1 {
+            font-weight: bold;
+        }
+    }
+}
+
 .terminal {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     width: 100%;
     padding: 30px;
 }
 
-.salas-container {
+.terminal-section {
     background-color: black;
     color: #33ff33;
     font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
+    padding: 30px;
     border: 2px solid #00ff00;
     border-radius: 5px;
+}
+
+.user-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .title h1 {
+        font-weight: bold;
+    }
+
+    .user-id {
+        background-color: rgba(0, 255, 0, 0.1);
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-family: 'Courier New', monospace;
+        color: #00ff00;
+        border-radius: 0.375rem;
+        font-weight: 500;
+    }
 }
 
 h1 {
     font-size: 24px;
     color: #33ff33;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.salas-container .rooms-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    h1 {
+        font-weight: bold;
+    }
 }
 
 .salas-container ul {
@@ -37,7 +93,21 @@ h1 {
 
 .salas-container li {
     border-bottom: 1px solid #00ff00;
-    padding: 10px 0;
+    padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        margin: 0;
+    }
+
+    .info-room {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
 }
 
 .salas-container p {
@@ -85,6 +155,12 @@ h1 {
     text-align: center;
     font-size: 18px;
     animation: fadeIn 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+
 }
 
 @keyframes fadeIn {
@@ -96,21 +172,46 @@ h1 {
     }
 }
 
+p {
+    font-size: 16px; /* Tamaño por defecto para pantallas grandes */
+    line-height: 1.5; /* Espaciado entre líneas */
+  }
+
 /* Desktop (pantallas grandes) */
 @media (min-width: 1024px) {
     .terminal {
-        max-width: 800px;
+        max-width: 1000px;
     }
 }
   
 @media (min-width: 768px) and (max-width: 1023px) {
     .salas-container {
         width: 100%;
+        padding: 15px;
     }
+
+    h1 {
+        font-size: 22px;
+    }
+
+
+    p {
+        font-size: 14px; /* Ajustado para pantallas de tablet */
+      }
 }
   
 @media (max-width: 767px) {
-    .salas-container {
+    .salas-container, .user-section {
         width: 100%;
+        padding: 15px;
     }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 12px; /* Ajustado para pantallas de móvil */
+    }
+
 }
