@@ -1,0 +1,22 @@
+{
+    "salas_disponibles": "Available Rooms",
+    "no_rooms_message": "No rooms available.",
+    "create_new_room": "Create new room",
+    "create_room_button": "Create Room",
+    "join_room_button": "Join Room",
+    "sala_espera": "Waiting Room - Tic Tac Toe",
+    "id_sala": "Room ID:",
+    "jugador1": "Player 1:",
+    "jugador2": "Player 2:",
+    "esperando_jugador2": "Waiting for Player 2 to join...",
+    "propietario_sala": "You are the owner of this room!",
+    "empezar_partida": "Start Game",
+    "cerrar_partida": "Close Game",
+    "tic_tac_toe_result": "Tic Tac Toe - Result",
+    "volver_menu_principal": "Back to Main Menu",
+    "tu_eres_player": "You are player: ",
+    "turno_de": "Turn of: ",
+    "ha_ganado": "has won!",
+    "jugada": "Move"
+}
+  

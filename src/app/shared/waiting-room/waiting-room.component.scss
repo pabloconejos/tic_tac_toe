@@ -5,56 +5,74 @@
     font-family: 'Courier New', Courier, monospace;
     color: #00ff00;
     background-color: #000000;
-    padding: 30px; /* Aumentar padding */
-    width: 100%; /* Cambiar ancho */
-    max-width: 800px; /* Aumentar el tamaño máximo del modal */
-}
-
-.terminal-header {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .terminal-header {
     background-color: #333;
     color: #fff;
-    padding: 10px; /* Aumentar padding */
-    font-size: 16px; /* Aumentar tamaño de fuente */
+    padding: 10px;
+    font-size: 16px;
     border-bottom: 1px solid #00ff00;
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
-
-.terminal-body {
+  }
+  
+  .terminal-body {
     background-color: #000;
     color: #00ff00;
-    padding: 20px; /* Aumentar padding */
-    font-size: 16px; /* Aumentar tamaño de fuente */
+    padding: 40px;
+    font-size: 16px;
     width: 100%;
     text-align: left;
-}
-
-.player-info p {
-    margin: 10px 0; /* Aumentar espaciado */
-}
-
-.start-button {
+  }
+  
+  .player-info p {
+    margin: 10px 0;
+  }
+  
+  .start-button {
     margin-top: 20px;
     background-color: #333;
     border: 1px solid #00ff00;
     color: #00ff00;
-    padding: 10px 20px; /* Aumentar padding */
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px; /* Aumentar tamaño de fuente */
-}
-
-.controls {
+    font-size: 16px;
+  }
+  
+  .controls {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    cursor: pointer;
-}
+  }
+  
+  .controls span {
+    border: #00ff00 solid 2px;
+    height: 15px;
+    width: 15px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00ff00;
+    transition: all 0.1s ease-in;
+  }
 
-.owner-message {
-    color: #ffcc00; /* Un color diferente para resaltar */
+  .controls span:last-child:hover {
+    background-color: #00ff00;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  .close-button:hover {
+    color: #ff6666; /* Cambia el color al pasar el mouse */
+  }
+  
+  .owner-message {
+    color: #ffcc00;
     font-weight: bold;
     margin-top: 10px;
   }

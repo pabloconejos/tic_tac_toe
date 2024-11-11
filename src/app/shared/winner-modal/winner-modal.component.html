@@ -1,16 +1,16 @@
-<!-- ganador-modal.component.html -->
-<div class="terminal-header">
-    <span class="title">Tic Tac Toe - Resultado</span>
+<div class="" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <div class="terminal-header">
+    <span class="title">{{ 'tic_tac_toe_result' | translate }}</span>
     <span class="controls">
-      &#x25A0; &#x25A1; <p>x</p>
+        &#x25A0; &#x25A1; &#x25A0;
     </span>
   </div>
-  
-  <div class="terminal-body">
-    <p>{{data.message}}</p>
     
+  <div class="terminal-body">
+    <p>{{ data.message }}</p>
+      
     <button class="menu-button" (click)="cerrarModal()">
-      Volver al Menú Principal
+      {{ 'volver_menu_principal' | translate }}
     </button>
   </div>
-  
+</div>

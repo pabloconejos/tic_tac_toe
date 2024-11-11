@@ -1,26 +1,30 @@
-<div class="terminal-header">
-  <span class="title">Sala de Espera - Tic Tac Toe</span>
-  <span class="controls">
-    &#x25A0; &#x25A1; <p (click)="cerrarPartida()">x</p>
-  </span>
-</div>
-
-<div class="terminal-body">
-  <p>ID de la Sala: <strong>{{ data.id }}</strong></p>
-
-  <div class="player-info">
-    <p>Jugador 1: <strong>{{ data.jugador1_id || 'Esperando...' }}</strong></p>
-    <p>Jugador 2: <strong>{{ data.jugador2_id || 'Esperando...' }}</strong></p>
+<div class="" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <div class="terminal-header">
+    <span class="title">{{ 'sala_espera' | translate }}</span>
+    <span class="controls">
+      <span class="btn"></span>
+      <span class="btn"></span>
+      <span class="btn" (click)="cerrarPartida()">x</span>
+    </span>
   </div>
-
-  <p *ngIf="!data.jugador2_id">Esperando a que el jugador 2 se una...</p>
   
-  <!-- Mensaje de propietario si el jugador es el jugador1 -->
-  <p *ngIf="data.jugador1_id && data.jugador1_id === userService.getUserId()" class="owner-message">
-    ¡Eres el propietario de esta sala!
-  </p>
-
-  <button class="start-button" [disabled]="!data.jugador1_id || !data.jugador2_id" (click)="empezarPartida()">
-    Empezar Partida
-  </button>
+  <div class="terminal-body">
+    <p>{{ 'id_sala' | translate }} <strong>{{ data.id }}</strong></p>
+  
+    <div class="player-info">
+      <p>{{ 'jugador1' | translate }} <strong>{{ data.jugador1_id || 'Esperando...' }}</strong></p>
+      <p>{{ 'jugador2' | translate }} <strong>{{ data.jugador2_id || 'Esperando...' }}</strong></p>
+    </div>
+  
+    <p *ngIf="!data.jugador2_id">{{ 'esperando_jugador2' | translate }}</p>
+  
+    <p *ngIf="data.jugador1_id && data.jugador1_id === userService.getUserId()" class="owner-message">
+      {{ 'propietario_sala' | translate }}
+    </p>
+  
+    <button class="start-button" [disabled]="!data.jugador1_id || !data.jugador2_id" (click)="empezarPartida()">
+      {{ 'empezar_partida' | translate }}
+    </button>
+  </div>  
 </div>
+

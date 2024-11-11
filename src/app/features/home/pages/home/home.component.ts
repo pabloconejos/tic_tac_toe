@@ -5,6 +5,7 @@ import { WaitingRoomComponent } from '../../../../shared/waiting-room/waiting-ro
 import { Router } from '@angular/router';
 import { ModalServiceService, WebsocketService, RoomService, UserService } from '@core/services';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -22,9 +23,10 @@ export class HomeComponent implements OnInit, OnDestroy{
     public userService: UserService,
     private dialog: MatDialog,
     private modalService: ModalServiceService,
-    private router: Router) 
+    private router: Router,
+    private translate: TranslateService) 
   {
-
+    this.translate.setDefaultLang('en');
   }
 
   ngOnInit() {

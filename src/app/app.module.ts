@@ -8,7 +8,13 @@ import { WaitingRoomComponent } from './shared/waiting-room/waiting-room.compone
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatDialogModule } from '@angular/material/dialog';
 import { WinnerModalComponent } from './shared/winner-modal/winner-modal.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +24,18 @@ import { WinnerModalComponent } from './shared/winner-modal/winner-modal.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      },
+      defaultLanguage: 'en'
+  })
   ],
-  providers: [CookieService, provideAnimationsAsync()],
+  providers: [CookieService, provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

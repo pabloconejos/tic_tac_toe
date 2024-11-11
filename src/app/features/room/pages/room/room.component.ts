@@ -7,6 +7,7 @@ import { IRoom } from 'src/app/interfaces/Room';
 import { MatDialog } from '@angular/material/dialog';
 import { WinnerModalComponent } from 'src/app/shared/winner-modal/winner-modal.component';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room',
@@ -25,10 +26,11 @@ export class RoomComponent implements OnInit, OnDestroy{
     private userService: UserService,
     private websocketService: WebsocketService,
     private router: Router,
-    private dialog: MatDialog) 
-  {
-
-  }
+    private dialog: MatDialog,
+    private translate: TranslateService)
+    {
+      this.translate.setDefaultLang('en');
+    }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -40,7 +42,8 @@ export class RoomComponent implements OnInit, OnDestroy{
       this.router.navigate(['/home']);
     }
 
-    const room = this.roomService.currentRoom.id
+    console.log(this.roomService.currentRoom)
+    const room = this.roomService.currentRoom.id ?? ''
     this.cookieService.set('tic_tac_toe-room', room)
     this.roomService.initBoard()
     this.listenEvents()
@@ -54,12 +57,21 @@ export class RoomComponent implements OnInit, OnDestroy{
   
         if (this.roomService.currentRoom.winner) {
           let data;
+
           if (this.roomService.currentRoom.winner === this.getPlayer()) {
             data = { winner: true, message: '¡Felicitaciones! Has ganado la partida.'}
-          } else {
+          } 
+          
+          if (this.roomService.currentRoom.winner !== this.getPlayer()) {
             data = { winner: false, message: 'Perdiste :( El otro jugador ganado la partida.'}
           }
-          this.openModal(data)
+
+          if (this.roomService.currentRoom.winner === 'tie') {
+            data = { winner: false, message: 'Ha habido un empate :( Vuelve al menu principal y juega otra partida.'}
+          }
+
+
+          this.openModal(data!)
         }
       })
     );
