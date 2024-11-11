@@ -22,7 +22,7 @@
       {{ 'propietario_sala' | translate }}
     </p>
   
-    <button class="start-button" [disabled]="!data.jugador1_id || !data.jugador2_id" (click)="empezarPartida()">
+    <button class="start-button" [ngClass]="!data.jugador1_id || !data.jugador2_id ? 'disabled' : ''" [disabled]="!data.jugador1_id || !data.jugador2_id" (click)="empezarPartida()">
       {{ 'empezar_partida' | translate }}
     </button>
   </div>  

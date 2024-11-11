@@ -60,24 +60,18 @@ export class RoomComponent implements OnInit, OnDestroy{
           let data;
 
           if (this.roomService.currentRoom.winner === this.getPlayer()) {
-            this.translate.get('game.win').subscribe((message: string) => {
-              data = { winner: true, message };
-              this.openModal(data);
-            });
+            const message = this.translate.instant('game.win');
+            data = { winner: true, message: message}
           } 
           
           if (this.roomService.currentRoom.winner !== this.getPlayer()) {
-            this.translate.get('game.lose').subscribe((message: string) => {
-              data = { winner: false, message };
-              this.openModal(data);
-            });
+            const message = this.translate.instant('game.lose');
+            data = { winner: false, message: message}
           }
-        
+
           if (this.roomService.currentRoom.winner === 'tie') {
-            this.translate.get('game.tie').subscribe((message: string) => {
-              data = { winner: false, message };
-              this.openModal(data);
-            });
+            const message = this.translate.instant('game.tie');
+            data = { winner: false, message: message}
           }
 
 
@@ -88,6 +82,7 @@ export class RoomComponent implements OnInit, OnDestroy{
     
     this.subscriptions.push(
       this.websocketService.roomClosed().subscribe((roomId: string) => {
+        console.log('roomClosed', this.roomService.currentRoom.winner)
         if (this.roomService.currentRoom.winner) { return }
         const data = { winner: true, message: '¡Ganaste! El otro jugador abandono la partida.'}
         this.openModal(data)
@@ -122,6 +117,7 @@ export class RoomComponent implements OnInit, OnDestroy{
 
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('SE CIERRA EL MODAL GANADOR', result)
       if (result?.tipo == "home") {
         this.router.navigate(['/home']);
         this.websocketService.closeRoom(this.roomService.currentRoom.id); // al cerrar la sala como que se recarga la pagina

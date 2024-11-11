@@ -76,4 +76,11 @@
     font-weight: bold;
     margin-top: 10px;
   }
+
+  .start-button:disabled {
+    background-color: #333;
+    color: #666;
+    border-color: #666;
+    cursor: not-allowed;
+  }
   
