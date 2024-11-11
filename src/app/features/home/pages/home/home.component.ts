@@ -40,6 +40,10 @@ export class HomeComponent implements OnInit, OnDestroy{
     };
   }
 
+  reLoad() {
+    window.location.reload()
+  }
+
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());

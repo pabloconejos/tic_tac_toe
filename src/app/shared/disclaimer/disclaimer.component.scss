@@ -1,0 +1,43 @@
+/* Estilo de la tarjeta */
+.terminal-card {
+    background-color: black;
+    color: limegreen;
+    border: 1px solid limegreen;
+    padding: 20px;
+    width: 300px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    border-radius: 5px;
+  }
+  
+  .terminal-message {
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .terminal-button {
+    background-color: black;
+    color: limegreen;
+    border: 1px solid limegreen;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .terminal-button:hover {
+    background-color: limegreen;
+    color: black;
+    border-color: black;
+  }
+  
+  .terminal-button:focus {
+    box-shadow: 0 0 5px limegreen;
+  }
+  

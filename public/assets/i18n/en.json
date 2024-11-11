@@ -23,6 +23,9 @@
         "win": "Congratulations! You have won the game.",
         "lose": "You lost :( The other player won the game.",
         "tie": "It's a tie :( Go back to the main menu and play another game."
-    }
+    },
+    "disclaimer": "You left suddenly. A game should not be abandoned before it's finished. If you join one, you must finish it.",
+    "salir": "EXIT"
+
 }
   

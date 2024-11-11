@@ -1,5 +1,5 @@
 <div class="main-section cdk-overlay-pane">
-    <div class="terminal">
+    <div *ngIf="userService.getUserId()" class="terminal">
         <header>
             <div class="title">
                 <img src="assets/icons/gameController.svg" alt="">
@@ -46,4 +46,10 @@
        </article>
        
     </div>
+
+    <div *ngIf="!userService.getUserId()">
+        <app-disclaimer></app-disclaimer>
+    </div>
 </div>
+
+
