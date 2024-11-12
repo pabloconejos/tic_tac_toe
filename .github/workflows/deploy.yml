@@ -25,4 +25,4 @@ jobs:
         run: npm run build
 
       - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN_FRONTEND }}
+        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN_FRONTEND }}
