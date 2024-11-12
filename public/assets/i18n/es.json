@@ -24,7 +24,7 @@
         "lose": "Perdiste :( El otro jugador ganó la partida.",
         "tie": "Ha habido un empate :( Vuelve al menú principal y juega otra partida."
     },
-    "disclaimer": "Has salido de forma repentina. No se debe abandonar una partida antes de terminarla. Si te unes a una, es para acabarla.",
-    "salir": "SALIR"
+    "disclaimer": "Ha ocurrido un error en el servidor con tu id. Espera y recarga la pagina",
+    "salir": "Recargar"
 }
   
