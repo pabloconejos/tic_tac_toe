@@ -1,4 +1,4 @@
-# Tic Tac Toe API
+# Tic Tac Toe ONLINE
 
 ![Logo del proyecto](public/assets/tictactoeimg.png)  
 
