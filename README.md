@@ -1,6 +1,6 @@
 # Tic Tac Toe API
 
-![Logo del proyecto](assets/tictactoeimg.png)  
+![Logo del proyecto](public/assets/tictactoeimg.png)  
 
 Este es el front-end del juego online de Tic Tac Toe desarrollado en Angular. La aplicación se conecta en tiempo real con la API a través de WebSockets y proporciona una interfaz interactiva para los jugadores, permitiéndoles unirse a salas y jugar partidas de Tic Tac Toe.
 
