@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io'
 import { IRoom, RoomPlayers } from '../../interfaces/Room';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class WebsocketService extends Socket {
 
   constructor() {
     super({
-      url: 'http://localhost:3000',
+      url: environment.apiUrl,
       options: {
         transports: ['websocket'],
       },
