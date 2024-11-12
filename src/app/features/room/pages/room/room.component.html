@@ -1,18 +1,27 @@
 <div *ngIf="roomService.currentRoom" class="game-container">
   <div class="game">
-      <h2>{{ 'tu_eres_player' | translate }}{{ getPlayer() }}</h2>
-      <h2>{{ 'turno_de' | translate }}{{ roomService.currentRoom.turn }}</h2>
-      <div *ngIf="roomService.currentRoom.winner" class="winner">
-          ¡{{ roomService.currentRoom.winner }} {{ 'ha_ganado' | translate }}!
-      </div>
-      <div class="board">
-          <div 
-              *ngFor="let cell of roomService.currentRoom.board; let i = index" 
-              (click)="playMove(i)" 
-              class="cell">
-              {{ cell }}
-          </div>
-      </div>
+    <div class="status-container">
+        <div class="status">
+          <h1>{{ 'tu_eres_player' | translate }}</h1>
+          <div class="value">{{ getPlayer() }}</div>
+        </div>
+        <div class="status">
+          <h1>{{ 'turno_de' | translate }}</h1>
+          <div class="value">{{ roomService.currentRoom.turn }}</div>
+        </div>
+    </div>
+
+    <div *ngIf="roomService.currentRoom.winner" class="winner">
+        ¡{{ roomService.currentRoom.winner }} {{ 'ha_ganado' | translate }}!
+    </div>
+    <div class="board">
+        <div 
+            *ngFor="let cell of roomService.currentRoom.board; let i = index" 
+            (click)="playMove(i)" 
+            class="cell">
+            {{ cell }}
+        </div>
+    </div>
   </div>
 </div>
 
