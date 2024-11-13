@@ -45,7 +45,7 @@
             <p>{{ 'no_rooms_message' | translate }}</p>
         </div>
 
-       <article>
+       <article *ngIf="userService.getUserId()">
             <button (click)="createRoom()" class="create-room-button">+ {{ 'create_new_room' | translate }}</button>
        </article>
        
