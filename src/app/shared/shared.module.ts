@@ -5,6 +5,7 @@ import { WinnerModalComponent } from './winner-modal/winner-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -17,7 +18,8 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
   ],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    DragDropModule
   ],
   exports: [LanguageSelectorComponent, DisclaimerComponent]
 })
