@@ -24,7 +24,8 @@
         "lose": "Perdiste :( El otro jugador ganó la partida.",
         "tie": "Ha habido un empate :( Vuelve al menú principal y juega otra partida."
     },
-    "disclaimer": "Ha ocurrido un error en el servidor con tu id. Espera y recarga la pagina",
+    "disclaimer": "Ha ocurrido un error en el servidor con tu ID. Por favor, espera un momento y recarga la página.",
+    "disclaimer_2": "El servidor podría estar apagado debido a inactividad. Si el problema persiste, contacta con el desarrollador.",
     "salir": "Recargar"
 }
   

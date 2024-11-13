@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://tic-tac-toe-server-bxvu.onrender.com/',
+    apiUrl: 'https://tic-tac-toe-server-bxvu.onrender.com',
 };

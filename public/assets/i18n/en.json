@@ -25,7 +25,7 @@
         "tie": "It's a tie :( Go back to the main menu and play another game."
     },
     "disclaimer": "There is a server error with your id",
+    "disclaimer_2": "The server might be down due to inactivity. If the issue persists, please contact the developer.",
     "salir": "Reload"
-
 }
   
