@@ -1,5 +1,5 @@
 <div class="main-section cdk-overlay-pane">
-    <div *ngIf="userService.getUserId()" class="terminal">
+    <div class="terminal">
         <header>
             <div class="title">
                 <img src="assets/icons/gameController.svg" alt="">
@@ -13,7 +13,11 @@
                 <img src="assets/icons/terminal.svg" alt="">
                 <h1>user_id</h1>
             </div>
-            <h1 class="user-id">{{ userService.getUserId() }}</h1>
+            <h1 *ngIf="userService.getUserId()" class="user-id">{{ userService.getUserId() }}</h1>
+            <div *ngIf="!userService.getUserId() && true" class="reload-container">
+                <h1 (click)="reload()" class="user-id btn-reload">{{ 'salir' | translate }}</h1>
+                <app-disclaimer class="disclaimer" (message)="'message'"></app-disclaimer>
+            </div>
         </article>
         
         <div class="terminal-section salas-container">
@@ -45,10 +49,6 @@
             <button (click)="createRoom()" class="create-room-button">+ {{ 'create_new_room' | translate }}</button>
        </article>
        
-    </div>
-
-    <div *ngIf="!userService.getUserId()">
-        <app-disclaimer></app-disclaimer>
     </div>
 </div>
 

@@ -172,6 +172,27 @@ h1 {
     }
 }
 
+.reload-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.disclaimer {
+    display: none;
+    position: absolute;
+    top: 100%; /* Ajusta según necesites */
+    left: 0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.btn-reload:hover + .disclaimer {
+    display: block;
+    
+}
+
 p {
     font-size: 16px; /* Tamaño por defecto para pantallas grandes */
     line-height: 1.5; /* Espaciado entre líneas */

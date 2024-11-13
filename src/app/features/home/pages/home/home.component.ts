@@ -163,4 +163,8 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   handlerMessage(message: string) {
   }
+
+  reload() {
+    window.location.reload()
+  }
 }

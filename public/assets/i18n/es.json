@@ -25,7 +25,7 @@
         "tie": "Ha habido un empate :( Vuelve al menú principal y juega otra partida."
     },
     "disclaimer": "Ha ocurrido un error en el servidor con tu ID. Por favor, espera un momento y recarga la página.",
-    "disclaimer_2": "El servidor podría estar apagado debido a inactividad. Si el problema persiste, contacta con el desarrollador.",
+    "disclaimer_2": "El servidor podría estar inactivo por falta de actividad. Al recargar, el servidor puede tardar unos segundos en activarse. Por favor, evita pulsar el botón repetidamente. Si el problema persiste, contacta con el desarrollador.",
     "salir": "Recargar"
 }
   

@@ -6,9 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './disclaimer.component.scss'
 })
 export class DisclaimerComponent {
-  exitGame() {
-    window.location.reload()
-  }
   
-
 }
