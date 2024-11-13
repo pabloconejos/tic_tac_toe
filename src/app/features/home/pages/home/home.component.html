@@ -48,6 +48,17 @@
        <article *ngIf="userService.getUserId()">
             <button (click)="createRoom()" class="create-room-button">+ {{ 'create_new_room' | translate }}</button>
        </article>
+
+       <div *ngIf="!userService.getUserId()" class="card-info">
+        <div class="card-text">
+          {{ "disclaimer" | translate }}
+          <br>
+          <hr style="margin-top: 5px; margin-bottom: 5px;">
+          {{ "disclaimer_2" | translate }}
+        </div>
+        <button (click)="reload()" class="reload-button">{{ "salir" | translate }}</button>
+      </div>
+      
        
     </div>
 </div>

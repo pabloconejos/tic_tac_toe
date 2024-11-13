@@ -236,3 +236,57 @@ p {
     }
 
 }
+
+
+
+/** info card **/
+
+/* Estilos generales para la tarjeta */
+.card-info {
+    display: none;
+    background-color: #1e1e1e; /* Fondo tipo terminal */
+    color: #00ff00; /* Texto verde, típico de terminal */
+    padding: 20px;
+    border: 2px solid #00ff00; /* Borde verde */
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    text-align: left;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); /* Sombra verde tenue */
+  }
+  
+  /* Estilos del texto dentro de la tarjeta */
+  .card-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Estilos del botón de recarga */
+  .reload-button {
+    background-color: #333; /* Fondo oscuro del botón */
+    color: #00ff00; /* Texto verde */
+    border: 2px solid #00ff00; /* Borde verde */
+    padding: 10px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efecto hover para el botón */
+  .reload-button:hover {
+    background-color: #00ff00; /* Fondo verde al hacer hover */
+    color: #1e1e1e; /* Cambia el texto a oscuro */
+  }
+
+  hr {
+    border-color: #00ff00;
+  }
+  
+  /* Mostrar la tarjeta solo en pantallas pequeñas (por ejemplo, hasta 600px) */
+  @media (max-width: 600px) {
+    .card-info {
+      display: block;
+    }
+  }
+  
