@@ -33,7 +33,7 @@
                             <p>{{ 'sala_' + room.id | translate }}</p>
                             <p> {{'jugadores' | translate }} {{ roomService.players(room) }}</p>
                         </div>
-                        <button (click)="joinRoom(room.id)">{{ 'join_room_button' | translate }}</button>
+                        <button class="join-room-button" (click)="joinRoom(room.id)">{{ 'join_room_button' | translate }}</button>
                     </li>
                 }
                 

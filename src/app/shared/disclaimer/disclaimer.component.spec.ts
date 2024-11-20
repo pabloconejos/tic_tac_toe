@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DisclaimerComponent } from './disclaimer.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 describe('DisclaimerComponent', () => {
   let component: DisclaimerComponent;
@@ -8,7 +9,11 @@ describe('DisclaimerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DisclaimerComponent]
+      declarations: [DisclaimerComponent],
+      providers: [TranslateService],
+      imports: [
+        TranslateModule.forRoot(),  // Importa el SharedModule aquí
+      ],
     })
     .compileComponents();
 
